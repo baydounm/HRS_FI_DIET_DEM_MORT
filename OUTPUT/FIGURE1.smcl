@@ -1,0 +1,488 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. 
+. **STEP 8: DETERMINE SAMPLE WITH COMPLETE DATA ON foodinsecurity IN 2006-2008, DEMENTIA PROBABILITY DATA AT 2012, AND WHERE RESPONDENT'S AGE IS >50 IN 2012**
+. 
+. use "E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE",clear
+{txt}
+{com}. 
+. 
+. capture drop sample50plus2012
+{txt}
+{com}. gen sample50plus2012=.
+{txt}(43,563 missing values generated)
+
+{com}. replace sample50plus2012=1 if r11agey_e>50 & r11agey_e~=.
+{txt}(19,719 real changes made)
+
+{com}. replace sample50plus2012=0 if sample50plus2012~=1 & r10agey_e~=.
+{txt}(3,016 real changes made)
+
+{com}. 
+. tab sample50plus2012
+
+{txt}sample50plu {c |}
+      s2012 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      3,016       13.27       13.27
+{txt}          1 {c |}{res}     19,719       86.73      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     22,735      100.00
+{txt}
+{com}. 
+. capture drop samplealivein2014
+{txt}
+{com}. gen samplealivein2014=.
+{txt}(43,563 missing values generated)
+
+{com}. replace samplealivein2014=1 if inw12==1
+{txt}(18,747 real changes made)
+
+{com}. replace samplealivein2014=0 if samplealivein2014~=1
+{txt}(24,816 real changes made)
+
+{com}. 
+. tab samplealivein2014
+
+{txt}samplealive {c |}
+     in2014 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     24,816       56.97       56.97
+{txt}          1 {c |}{res}     18,747       43.03      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     43,563      100.00
+{txt}
+{com}. 
+. 
+. 
+. 
+. capture drop samplefoodinsecurity2013
+{txt}
+{com}. gen samplefoodinsecurity2013=.
+{txt}(43,563 missing values generated)
+
+{com}. replace samplefoodinsecurity2013=1 if foodinsecurity_tot~=. 
+{txt}(7,566 real changes made)
+
+{com}. replace samplefoodinsecurity2013=0 if samplefoodinsecurity2013~=1
+{txt}(35,997 real changes made)
+
+{com}. 
+. tab samplefoodinsecurity2013
+
+{txt}samplefoodi {c |}
+nsecurity20 {c |}
+         13 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     35,997       82.63       82.63
+{txt}          1 {c |}{res}      7,566       17.37      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     43,563      100.00
+{txt}
+{com}. 
+. 
+. capture drop samplefoodnutrients
+{txt}
+{com}. gen samplefoodnutrients=.
+{txt}(43,563 missing values generated)
+
+{com}. replace samplefoodnutrients=1 if CALOR_SUM~=.
+{txt}(8,035 real changes made)
+
+{com}. replace samplefoodnutrients=0 if samplefoodnutrients~=1
+{txt}(35,528 real changes made)
+
+{com}. 
+. 
+. capture drop sampledementia
+{txt}
+{com}. gen sampledementia=.
+{txt}(43,563 missing values generated)
+
+{com}. replace sampledementia=1 if hrs_year==2014 & hurd_p!=. & expert_p!=. & lasso_p!=. 
+{txt}(7,291 real changes made)
+
+{com}. replace sampledementia=0 if sampledementia~=1
+{txt}(36,272 real changes made)
+
+{com}. 
+. tab sampledementia
+
+{txt}sampledemen {c |}
+        tia {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     36,272       83.26       83.26
+{txt}          1 {c |}{res}      7,291       16.74      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     43,563      100.00
+{txt}
+{com}. 
+. su AGE2012 if sampledementia==1
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}AGE2012 {c |}{res}      7,216     76.8265    6.301731         58        102
+{txt}
+{com}. 
+. save "E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE", replace
+{txt}{p 0 4 2}
+file {bf}
+E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. capture drop sample2
+{txt}
+{com}. gen sample2=.
+{txt}(43,563 missing values generated)
+
+{com}. replace sample2=1 if sample50plus2012==1 & samplealivein2014==1
+{txt}(17,312 real changes made)
+
+{com}. replace sample2=0 if sample2~=1
+{txt}(26,251 real changes made)
+
+{com}. 
+. capture drop sample3
+{txt}
+{com}. gen sample3=.
+{txt}(43,563 missing values generated)
+
+{com}. replace sample3=1 if sample50plus2012==1 & samplealivein2014==1 & samplefoodinsecurity2013==1 & samplefoodnutrients==1
+{txt}(6,772 real changes made)
+
+{com}. replace sample3=0 if sample3~=1
+{txt}(36,791 real changes made)
+
+{com}. 
+. 
+. capture drop sample4
+{txt}
+{com}. gen sample4=.
+{txt}(43,563 missing values generated)
+
+{com}. replace sample4=1 if sample50plus2012==1 & samplealivein2014==1 & samplefoodinsecurity2013==1 & samplefoodnutrients==1 & sampledementia==1
+{txt}(2,897 real changes made)
+
+{com}. replace sample4=0 if sample4~=1
+{txt}(40,666 real changes made)
+
+{com}. 
+. 
+. capture drop sample_final
+{txt}
+{com}. gen sample_final=.
+{txt}(43,563 missing values generated)
+
+{com}. replace sample_final=1 if sample50plus2012==1 & samplealivein2014==1 & samplefoodinsecurity2013==1 & sampledementia==1 & HCNSWGTR_NT~=. & samplefoodnutrients==1 
+{txt}(2,897 real changes made)
+
+{com}. replace sample_final=0 if sample_final~=1
+{txt}(40,666 real changes made)
+
+{com}. 
+. tab sample_final
+
+{txt}sample_fina {c |}
+          l {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     40,666       93.35       93.35
+{txt}          1 {c |}{res}      2,897        6.65      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     43,563      100.00
+{txt}
+{com}. 
+. su AGE2012 if sample_final==1
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}AGE2012 {c |}{res}      2,897    76.42665    6.047483         67        100
+{txt}
+{com}. 
+. 
+. 
+. 
+. save "E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE", replace
+{txt}{p 0 4 2}
+file {bf}
+E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. **STEP 9: MORTALITY VARIABLES FROM 2008 THROUGH 2020: TRACKER FILE INW**
+. 
+. **dead vs. alive: 2014-2020
+. 
+. capture drop died
+{txt}
+{com}. gen died=.
+{txt}(43,563 missing values generated)
+
+{com}. replace died=1 if (sample_final==1 & knowndeceasedyr~=. & knowndeceasedmo~=.)
+{txt}(902 real changes made)
+
+{com}. replace died=0 if died!=1 & sample_final==1
+{txt}(1,995 real changes made)
+
+{com}. 
+. tab died if sample_final==1
+
+       {txt}died {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      1,995       68.86       68.86
+{txt}          1 {c |}{res}        902       31.14      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,897      100.00
+{txt}
+{com}. 
+. 
+. **Date of death: dod**
+. 
+. su knowndeceasedmo knowndeceasedyr if sample_final==1
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+knowndecea~o {c |}{res}        902    7.169623     8.76269          1         98
+{txt}knowndecea~r {c |}{res}        902     2017.41    1.826621       2014       2021
+{txt}
+{com}. tab1 knowndeceasedmo knowndeceasedyr if sample_final==1
+
+{res}-> tabulation of knowndeceasedmo if sample_final==1 
+
+      {txt}KNOWN {c |}
+ DECEASED - {c |}
+      MONTH {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}         83        9.20        9.20
+{txt}          2 {c |}{res}         69        7.65       16.85
+{txt}          3 {c |}{res}         82        9.09       25.94
+{txt}          4 {c |}{res}         70        7.76       33.70
+{txt}          5 {c |}{res}         83        9.20       42.90
+{txt}          6 {c |}{res}         71        7.87       50.78
+{txt}          7 {c |}{res}         69        7.65       58.43
+{txt}          8 {c |}{res}         64        7.10       65.52
+{txt}          9 {c |}{res}         68        7.54       73.06
+{txt}         10 {c |}{res}         81        8.98       82.04
+{txt}         11 {c |}{res}         84        9.31       91.35
+{txt}         12 {c |}{res}         71        7.87       99.22
+{txt}         98 {c |}{res}          7        0.78      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}        902      100.00
+
+-> tabulation of knowndeceasedyr if sample_final==1 
+
+      {txt}KNOWN {c |}
+ DECEASED - {c |}
+       YEAR {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+       2014 {c |}{res}         51        5.65        5.65
+{txt}       2015 {c |}{res}        106       11.75       17.41
+{txt}       2016 {c |}{res}        159       17.63       35.03
+{txt}       2017 {c |}{res}        141       15.63       50.67
+{txt}       2018 {c |}{res}        145       16.08       66.74
+{txt}       2019 {c |}{res}        164       18.18       84.92
+{txt}       2020 {c |}{res}        123       13.64       98.56
+{txt}       2021 {c |}{res}         13        1.44      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}        902      100.00
+{txt}
+{com}. 
+. capture drop deathmonth
+{txt}
+{com}. gen deathmonth=knowndeceasedmo if knowndeceasedmo~=98
+{txt}(25,607 missing values generated)
+
+{com}. 
+. capture drop deathyear
+{txt}
+{com}. gen deathyear=knowndeceasedyr
+{txt}(25,481 missing values generated)
+
+{com}. 
+. capture drop deathday
+{txt}
+{com}. gen deathday=14
+{txt}
+{com}. 
+. capture drop dod
+{txt}
+{com}. gen dod=mdy(deathmonth, deathday, deathyear)
+{txt}(25,611 missing values generated)
+
+{com}. 
+. **Date of entry: doenter**
+. capture drop doenter
+{txt}
+{com}. gen doenter=mdy(01,01,2014)
+{txt}
+{com}. 
+. **Date of exit if still alive: doexit**
+. capture drop doexit
+{txt}
+{com}. gen doexit=mdy(12,31,2020) 
+{txt}
+{com}. 
+. **Date of exit for censor or dead**
+. capture drop doevent
+{txt}
+{com}. gen doevent=.
+{txt}(43,563 missing values generated)
+
+{com}. replace doevent=dod if died==1 & sample_final==1
+{txt}(895 real changes made)
+
+{com}. replace doevent=doexit if died==0 & sample_final==1
+{txt}(1,995 real changes made)
+
+{com}. 
+. su doevent
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}doevent {c |}{res}      2,890    21929.13    639.7958      19857      22353
+{txt}
+{com}. 
+. ***Estimated birth date**
+. 
+. capture drop dob
+{txt}
+{com}. gen dob=mdy(birthmo,14,birthyr)
+{txt}(331 missing values generated)
+
+{com}. 
+. 
+. 
+. capture drop ageevent
+{txt}
+{com}. gen ageevent=(doevent-dob)/365.5
+{txt}(40,673 missing values generated)
+
+{com}. 
+. capture drop ageenter
+{txt}
+{com}. gen ageenter=r12agey_e
+{txt}(24,816 missing values generated)
+
+{com}. 
+. save "E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE", replace
+{txt}{p 0 4 2}
+file {bf}
+E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. **STEP 10: STSET FOR MORTALITY OUTCOME***
+. 
+. capture drop AGE2014
+{txt}
+{com}. gen AGE2014=ageenter
+{txt}(24,816 missing values generated)
+
+{com}. 
+. save "E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE", replace
+{txt}{p 0 4 2}
+file {bf}
+E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. stset ageevent if sample_final==1, failure(died==1) enter(AGE2014) origin(AGE2014) scale(1)
+
+{txt}Survival-time data settings
+
+{col 10}Failure event: {res}died==1
+{col 1}{txt}Observed time interval: {res}(origin, ageevent]
+{col 6}{txt}Enter on or after: {res}time AGE2014
+{col 6}{txt}Exit on or before: {res}failure
+{col 6}{txt}Time for analysis: {res}(time-origin)
+{col 17}{txt}Origin: {res}time AGE2014
+{col 7}{txt}Keep observations 
+{col 17}{help j_st_ifvsoptif:{bf:if} {it:exp}}: {res}sample_final==1
+
+{txt}{hline 74}
+{res}     43,563{txt}  total observations
+{res}     40,666{txt}  ignored at outset because of {bf:if} {it:exp}
+{res}          7{txt}  event time missing (ageevent>=.){col 61}PROBABLE ERROR
+{res}          1{txt}  observation ends on or before {bf:enter()}
+{hline 74}
+{res}      2,889{txt}  observations remaining, representing
+{res}        894{txt}  failures in single-record/single-failure data
+{res} 17,456.763{txt}  total analysis time at risk and under observation
+                                                At risk from t = {res}        0
+                                     {txt}Earliest observed entry t = {res}        0
+                                          {txt}Last observed exit t = {res} 7.699043
+{txt}
+{com}. 
+. 
+. stdescribe if sample_final==1
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}{col 36}{c LT}{hline 14} Per subject {hline 14}{c RT}
+Category{col 28}Total{col 41}Mean{col 54}Min{col 62}Median{col 76}Max
+{hline 78}
+Number of subjects    {res}      2889   
+{txt}Number of records     {res}      2889           1           1          1          1
+
+{txt}Entry time (first)                 {res}        0           0          0          0
+{txt}Exit time (final)                  {res} 6.042493    .1067047   6.748291   7.699043
+
+{txt}Subjects with gap     {res}         0   
+{txt}Time on gap           {res}         0   
+{txt}Time at risk          {res} 17456.763    6.042493    .1067047   6.748291   7.699043
+
+{txt}Failures              {res}       894    .3094496           0          0          1
+{txt}{hline 78}
+
+{com}. stsum if sample_final==1
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}{col 10}{c |}{col 26}Incidence{col 40}Number of{col 52}{c LT}{hline 6} Survival time {hline 5}{c RT}
+        {col 10}{c |} Time at risk{col 31}rate{col 41}subjects{col 57}25%{col 67}50%{col 77}75%
+{hline 9}{c +}{hline 69}
+   Total {c |} {res} 17,456.7633   .0512122{col 40}     2889   5.777016  7.699043  7.699043
+{txt}
+{com}. strate if sample_final==1
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Estimated failure rates
+Number of records = {res}2889
+{txt}
+  {c TLC}{hline 5}{c -}{hline 9}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c TRC}
+  {c |} {res}  D         Y       Rate      Lower      Upper {txt}{c |}
+  {c LT}{hline 5}{c -}{hline 9}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c RT}
+  {c |} {res}894   1.7e+04   0.051212   0.047963   0.054682 {txt}{c |}
+  {c BLC}{hline 5}{c -}{hline 9}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c BRC}
+   Notes: Rate = D/Y = failures/person-time.
+          Lower and Upper are bounds of 95% confidence intervals.
+
+
+{com}. 
+. save "E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE", replace
+{txt}{p 0 4 2}
+file {bf}
+E:\16GBBACKUPUSB\BACKUP_USB_SEPTEMBER2014\SUMMER_STUDENT_2023\HRS_MANUSCRIPT_CHRIS\FINAL_DATA\HRS_PROJECTfoodinsecurityCONGMORT_finWIDE.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}

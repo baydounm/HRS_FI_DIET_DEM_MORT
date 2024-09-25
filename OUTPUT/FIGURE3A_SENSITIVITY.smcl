@@ -1,0 +1,1086 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. 
+. **MED4WAY FOR DIFFERENT PROBABILITIES OF DEMENTIA AS EXPOSURE, foodinsecurity AS MEDIATORS, AND ALL-CAUSE DEATH AS OUTCOME: REDUCED MODEL + EACH SES, LIFESTYLE AND HEALTH-RELATED FACTORS***
+. 
+. 
+. use finaldata_imputed_FINAL,clear
+{txt}
+{com}. 
+. *****************************OVERALL*******************************
+. capture drop zlnhurd_odds 
+{txt}
+{com}. capture drop zlnexpert_odds 
+{txt}
+{com}. capture drop zlnlasso_odds
+{txt}
+{com}. foreach x of varlist  lnhurd_odds lnexpert_odds lnlasso_odds {c -(}
+{txt}  2{com}.         mi passive: egen z`x'=std(`x') if sample_final==1
+{txt}  3{com}. {c )-}
+{res}{txt}{p}
+(passive variables
+{res}zlnhurd_odds zlnexpert_odds zlnlasso_odds
+{txt}unregistered because not in {it:m}=0)
+{p_end}
+{it:m}=0:
+(40,488 missing values generated)
+{it:m}=1:
+(40,488 missing values generated)
+{it:m}=2:
+(40,488 missing values generated)
+{it:m}=3:
+(40,488 missing values generated)
+{it:m}=4:
+(40,488 missing values generated)
+{it:m}=5:
+(40,488 missing values generated)
+{res}{txt}{it:m}=0:
+(40,488 missing values generated)
+{it:m}=1:
+(40,488 missing values generated)
+{it:m}=2:
+(40,488 missing values generated)
+{it:m}=3:
+(40,488 missing values generated)
+{it:m}=4:
+(40,488 missing values generated)
+{it:m}=5:
+(40,488 missing values generated)
+{res}{txt}{it:m}=0:
+(40,488 missing values generated)
+{it:m}=1:
+(40,488 missing values generated)
+{it:m}=2:
+(40,488 missing values generated)
+{it:m}=3:
+(40,488 missing values generated)
+{it:m}=4:
+(40,488 missing values generated)
+{it:m}=5:
+(40,488 missing values generated)
+
+{com}. 
+. save, replace
+{txt}{p 0 4 2}
+(file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_f14_000002.tmp{rm}
+not found)
+{p_end}
+{p 0 4 2}
+file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_f14_000002.tmp{rm}
+saved
+as .dta format
+{p_end}
+
+{com}. 
+. ***MODEL 1A************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  educationg*  if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  4.92e+12
+{txt}{col 49}        avg{col 67}= {res}  2.17e+15
+{txt}{col 49}        max{col 67}= {res}  1.06e+16
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4395178{col 26}{space 2} .0398095{col 37}{space 1}   11.04{col 46}{space 3}0.000{col 54}{space 4} .3614926{col 67}{space 3}  .517543
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4497027{col 26}{space 2}  .037144{col 37}{space 1}   12.11{col 46}{space 3}0.000{col 54}{space 4} .3769018{col 67}{space 3} .5225035
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0067695{col 26}{space 2} .0165008{col 37}{space 1}   -0.41{col 46}{space 3}0.682{col 54}{space 4}-.0391105{col 67}{space 3} .0255715
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0012916{col 26}{space 2} .0033189{col 37}{space 1}   -0.39{col 46}{space 3}0.697{col 54}{space 4}-.0077966{col 67}{space 3} .0052133
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0021238{col 26}{space 2} .0026803{col 37}{space 1}   -0.79{col 46}{space 3}0.428{col 54}{space 4} -.007377{col 67}{space 3} .0031295
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  7.02e+10
+{txt}{col 49}        avg{col 67}= {res}  4.73e+14
+{txt}{col 49}        max{col 67}= {res}  1.72e+15
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7317695{col 26}{space 2} .0682107{col 37}{space 1}   10.73{col 46}{space 3}0.000{col 54}{space 4}  .598079{col 67}{space 3} .8654599
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7726105{col 26}{space 2}  .071175{col 37}{space 1}   10.86{col 46}{space 3}0.000{col 54}{space 4} .6331102{col 67}{space 3} .9121109
+{txt}ereri_intref {c |}{col 14}{res}{space 2}  -.03164{col 26}{space 2} .0154723{col 37}{space 1}   -2.04{col 46}{space 3}0.041{col 54}{space 4}-.0619651{col 67}{space 3} -.001315
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0076918{col 26}{space 2}  .004673{col 37}{space 1}   -1.65{col 46}{space 3}0.100{col 54}{space 4}-.0168506{col 67}{space 3}  .001467
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0015093{col 26}{space 2} .0031994{col 37}{space 1}   -0.47{col 46}{space 3}0.637{col 54}{space 4}-.0077799{col 67}{space 3} .0047614
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite educationg1 educationg2 educationg3 educationg4 educationg5 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  1.63e+11
+{txt}{col 49}        avg{col 67}= {res}  4.15e+14
+{txt}{col 49}        max{col 67}= {res}  2.00e+15
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6329142{col 26}{space 2} .0571473{col 37}{space 1}   11.08{col 46}{space 3}0.000{col 54}{space 4} .5209075{col 67}{space 3} .7449208
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2}  .655644{col 26}{space 2} .0586043{col 37}{space 1}   11.19{col 46}{space 3}0.000{col 54}{space 4} .5407817{col 67}{space 3} .7705064
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0181369{col 26}{space 2} .0151071{col 37}{space 1}   -1.20{col 46}{space 3}0.230{col 54}{space 4}-.0477463{col 67}{space 3} .0114724
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0030882{col 26}{space 2}  .003002{col 37}{space 1}   -1.03{col 46}{space 3}0.304{col 54}{space 4} -.008972{col 67}{space 3} .0027955
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0015047{col 26}{space 2} .0023113{col 37}{space 1}   -0.65{col 46}{space 3}0.515{col 54}{space 4}-.0060347{col 67}{space 3} .0030254
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ***MODEL 1B************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  totwealth_2012  if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4419857{col 26}{space 2} .0395746{col 37}{space 1}   11.17{col 46}{space 3}0.000{col 54}{space 4}  .364421{col 67}{space 3} .5195505
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4539246{col 26}{space 2} .0372718{col 37}{space 1}   12.18{col 46}{space 3}0.000{col 54}{space 4} .3808731{col 67}{space 3}  .526976
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0072773{col 26}{space 2} .0159226{col 37}{space 1}   -0.46{col 46}{space 3}0.648{col 54}{space 4} -.038485{col 67}{space 3} .0239303
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0014907{col 26}{space 2} .0035233{col 37}{space 1}   -0.42{col 46}{space 3}0.672{col 54}{space 4}-.0083962{col 67}{space 3} .0054149
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0031708{col 26}{space 2} .0029445{col 37}{space 1}   -1.08{col 46}{space 3}0.282{col 54}{space 4}-.0089419{col 67}{space 3} .0026002
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7183482{col 26}{space 2} .0669553{col 37}{space 1}   10.73{col 46}{space 3}0.000{col 54}{space 4} .5871182{col 67}{space 3} .8495782
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7632602{col 26}{space 2} .0704022{col 37}{space 1}   10.84{col 46}{space 3}0.000{col 54}{space 4} .6252744{col 67}{space 3}  .901246
+{txt}ereri_intref {c |}{col 14}{res}{space 2} -.033297{col 26}{space 2} .0147658{col 37}{space 1}   -2.26{col 46}{space 3}0.024{col 54}{space 4}-.0622375{col 67}{space 3}-.0043566
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0088694{col 26}{space 2} .0049399{col 37}{space 1}   -1.80{col 46}{space 3}0.073{col 54}{space 4}-.0185514{col 67}{space 3} .0008127
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0027456{col 26}{space 2} .0034797{col 37}{space 1}   -0.79{col 46}{space 3}0.430{col 54}{space 4}-.0095657{col 67}{space 3} .0040744
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite totwealth_2012 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6201098{col 26}{space 2} .0559678{col 37}{space 1}   11.08{col 46}{space 3}0.000{col 54}{space 4} .5104149{col 67}{space 3} .7298047
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6481489{col 26}{space 2} .0580242{col 37}{space 1}   11.17{col 46}{space 3}0.000{col 54}{space 4} .5344235{col 67}{space 3} .7618742
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0208021{col 26}{space 2}  .014251{col 37}{space 1}   -1.46{col 46}{space 3}0.144{col 54}{space 4}-.0487335{col 67}{space 3} .0071292
+{txt}ereri_intmed {c |}{col 14}{res}{space 2} -.004387{col 26}{space 2} .0035499{col 37}{space 1}   -1.24{col 46}{space 3}0.217{col 54}{space 4}-.0113447{col 67}{space 3} .0025707
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}  -.00285{col 26}{space 2} .0028552{col 37}{space 1}   -1.00{col 46}{space 3}0.318{col 54}{space 4} -.008446{col 67}{space 3}  .002746
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ***MODEL 1C************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  marital_2012g*  if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  1.13e+13
+{txt}{col 49}        avg{col 67}= {res}  5.94e+14
+{txt}{col 49}        max{col 67}= {res}  8.91e+14
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4510313{col 26}{space 2} .0404384{col 37}{space 1}   11.15{col 46}{space 3}0.000{col 54}{space 4} .3717734{col 67}{space 3} .5302891
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4601238{col 26}{space 2} .0369036{col 37}{space 1}   12.47{col 46}{space 3}0.000{col 54}{space 4}  .387794{col 67}{space 3} .5324537
+{txt}ereri_intref {c |}{col 14}{res}{space 2} -.004936{col 26}{space 2} .0169319{col 37}{space 1}   -0.29{col 46}{space 3}0.771{col 54}{space 4} -.038122{col 67}{space 3}   .02825
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0014652{col 26}{space 2} .0052154{col 37}{space 1}   -0.28{col 46}{space 3}0.779{col 54}{space 4}-.0116873{col 67}{space 3} .0087569
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0026914{col 26}{space 2} .0040954{col 37}{space 1}   -0.66{col 46}{space 3}0.511{col 54}{space 4}-.0107181{col 67}{space 3} .0053354
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  1.91e+13
+{txt}{col 49}        avg{col 67}= {res}  1.45e+16
+{txt}{col 49}        max{col 67}= {res}  7.18e+16
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7335414{col 26}{space 2}  .067038{col 37}{space 1}   10.94{col 46}{space 3}0.000{col 54}{space 4} .6021494{col 67}{space 3} .8649334
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7801977{col 26}{space 2} .0703704{col 37}{space 1}   11.09{col 46}{space 3}0.000{col 54}{space 4} .6422742{col 67}{space 3} .9181213
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0324875{col 26}{space 2} .0154014{col 37}{space 1}   -2.11{col 46}{space 3}0.035{col 54}{space 4}-.0626737{col 67}{space 3}-.0023014
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0120886{col 26}{space 2} .0065883{col 37}{space 1}   -1.83{col 46}{space 3}0.067{col 54}{space 4}-.0250014{col 67}{space 3} .0008242
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0020802{col 26}{space 2} .0048562{col 37}{space 1}   -0.43{col 46}{space 3}0.668{col 54}{space 4}-.0115982{col 67}{space 3} .0074378
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite marital_2012g1 marital_2012g2 marital_2012g3 marital_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  1.45e+13
+{txt}{col 49}        avg{col 67}= {res}  4.04e+15
+{txt}{col 49}        max{col 67}= {res}  1.07e+16
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6325488{col 26}{space 2} .0560654{col 37}{space 1}   11.28{col 46}{space 3}0.000{col 54}{space 4} .5226626{col 67}{space 3}  .742435
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6607249{col 26}{space 2}  .057775{col 37}{space 1}   11.44{col 46}{space 3}0.000{col 54}{space 4}  .547488{col 67}{space 3} .7739618
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0194414{col 26}{space 2} .0149243{col 37}{space 1}   -1.30{col 46}{space 3}0.193{col 54}{space 4}-.0486924{col 67}{space 3} .0098097
+{txt}ereri_intmed {c |}{col 14}{res}{space 2} -.006147{col 26}{space 2}  .005154{col 37}{space 1}   -1.19{col 46}{space 3}0.233{col 54}{space 4}-.0162487{col 67}{space 3} .0039547
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0025877{col 26}{space 2} .0041438{col 37}{space 1}   -0.62{col 46}{space 3}0.532{col 54}{space 4}-.0107093{col 67}{space 3} .0055339
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1D************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  smoking_2012g* if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,891
+{txt}{col 49}Average RVI{col 67}= {res}    0.0001
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0001
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  2.01e+08
+{txt}{col 49}        avg{col 67}= {res}  6.17e+09
+{txt}{col 49}        max{col 67}= {res}  1.48e+10
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4482486{col 26}{space 2} .0402113{col 37}{space 1}   11.15{col 46}{space 3}0.000{col 54}{space 4} .3694358{col 67}{space 3} .5270613
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4701793{col 26}{space 2} .0377232{col 37}{space 1}   12.46{col 46}{space 3}0.000{col 54}{space 4} .3962432{col 67}{space 3} .5441153
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0146855{col 26}{space 2} .0157968{col 37}{space 1}   -0.93{col 46}{space 3}0.353{col 54}{space 4}-.0456466{col 67}{space 3} .0162755
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0044795{col 26}{space 2} .0051429{col 37}{space 1}   -0.87{col 46}{space 3}0.384{col 54}{space 4}-.0145593{col 67}{space 3} .0056004
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0027657{col 26}{space 2} .0039394{col 37}{space 1}   -0.70{col 46}{space 3}0.483{col 54}{space 4}-.0104867{col 67}{space 3} .0049553
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,891
+{txt}{col 49}Average RVI{col 67}= {res}    0.0001
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0002
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  6.46e+07
+{txt}{col 49}        avg{col 67}= {res}  4.52e+09
+{txt}{col 49}        max{col 67}= {res}  9.99e+09
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7103954{col 26}{space 2} .0658358{col 37}{space 1}   10.79{col 46}{space 3}0.000{col 54}{space 4} .5813597{col 67}{space 3} .8394311
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7637755{col 26}{space 2} .0695203{col 37}{space 1}   10.99{col 46}{space 3}0.000{col 54}{space 4} .6275182{col 67}{space 3} .9000328
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0359984{col 26}{space 2}  .014534{col 37}{space 1}   -2.48{col 46}{space 3}0.013{col 54}{space 4}-.0644846{col 67}{space 3}-.0075122
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0142171{col 26}{space 2} .0068166{col 37}{space 1}   -2.09{col 46}{space 3}0.037{col 54}{space 4}-.0275775{col 67}{space 3}-.0008568
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0031646{col 26}{space 2} .0049747{col 37}{space 1}   -0.64{col 46}{space 3}0.525{col 54}{space 4}-.0129148{col 67}{space 3} .0065856
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite smoking_2012g1 smoking_2012g2 smoking_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,891
+{txt}{col 49}Average RVI{col 67}= {res}    0.0001
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0002
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  1.02e+08
+{txt}{col 49}        avg{col 67}= {res}  1.34e+10
+{txt}{col 49}        max{col 67}= {res}  4.74e+10
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6151521{col 26}{space 2} .0557559{col 37}{space 1}   11.03{col 46}{space 3}0.000{col 54}{space 4} .5058726{col 67}{space 3} .7244317
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6532268{col 26}{space 2} .0579402{col 37}{space 1}   11.27{col 46}{space 3}0.000{col 54}{space 4} .5396661{col 67}{space 3} .7667875
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0265923{col 26}{space 2} .0141377{col 37}{space 1}   -1.88{col 46}{space 3}0.060{col 54}{space 4}-.0543017{col 67}{space 3} .0011172
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0085509{col 26}{space 2} .0052595{col 37}{space 1}   -1.63{col 46}{space 3}0.104{col 54}{space 4}-.0188593{col 67}{space 3} .0017576
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0029315{col 26}{space 2} .0040416{col 37}{space 1}   -0.73{col 46}{space 3}0.468{col 54}{space 4}-.0108528{col 67}{space 3} .0049898
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1E************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  physic_act_2012g* if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  3.55e+09
+{txt}{col 49}        avg{col 67}= {res}  2.87e+10
+{txt}{col 49}        max{col 67}= {res}  5.91e+10
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .3751356{col 26}{space 2} .0384787{col 37}{space 1}    9.75{col 46}{space 3}0.000{col 54}{space 4} .2997187{col 67}{space 3} .4505525
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .3898347{col 26}{space 2} .0361069{col 37}{space 1}   10.80{col 46}{space 3}0.000{col 54}{space 4} .3190665{col 67}{space 3} .4606029
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0089029{col 26}{space 2} .0149583{col 37}{space 1}   -0.60{col 46}{space 3}0.552{col 54}{space 4}-.0382207{col 67}{space 3} .0204148
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0024983{col 26}{space 2} .0044308{col 37}{space 1}   -0.56{col 46}{space 3}0.573{col 54}{space 4}-.0111825{col 67}{space 3}  .006186
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0032979{col 26}{space 2} .0037306{col 37}{space 1}   -0.88{col 46}{space 3}0.377{col 54}{space 4}-.0106098{col 67}{space 3}  .004014
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  2.30e+09
+{txt}{col 49}        avg{col 67}= {res}  1.15e+10
+{txt}{col 49}        max{col 67}= {res}  2.81e+10
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2}  .624584{col 26}{space 2} .0633914{col 37}{space 1}    9.85{col 46}{space 3}0.000{col 54}{space 4} .5003391{col 67}{space 3} .7488289
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6712984{col 26}{space 2} .0668785{col 37}{space 1}   10.04{col 46}{space 3}0.000{col 54}{space 4} .5402189{col 67}{space 3} .8023779
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0317777{col 26}{space 2} .0137837{col 37}{space 1}   -2.31{col 46}{space 3}0.021{col 54}{space 4}-.0587932{col 67}{space 3}-.0047622
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0117171{col 26}{space 2} .0059905{col 37}{space 1}   -1.96{col 46}{space 3}0.050{col 54}{space 4}-.0234583{col 67}{space 3} .0000241
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0032196{col 26}{space 2} .0046547{col 37}{space 1}   -0.69{col 46}{space 3}0.489{col 54}{space 4}-.0123426{col 67}{space 3} .0059034
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite physic_act_2012g1 physic_act_2012g2 physic_act_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  2.92e+09
+{txt}{col 49}        avg{col 67}= {res}  7.63e+09
+{txt}{col 49}        max{col 67}= {res}  1.87e+10
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .5388291{col 26}{space 2} .0538742{col 37}{space 1}   10.00{col 46}{space 3}0.000{col 54}{space 4} .4332376{col 67}{space 3} .6444206
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .5707584{col 26}{space 2} .0559552{col 37}{space 1}   10.20{col 46}{space 3}0.000{col 54}{space 4} .4610882{col 67}{space 3} .6804286
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0221085{col 26}{space 2} .0132248{col 37}{space 1}   -1.67{col 46}{space 3}0.095{col 54}{space 4}-.0480286{col 67}{space 3} .0038117
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0066538{col 26}{space 2}  .004546{col 37}{space 1}   -1.46{col 46}{space 3}0.143{col 54}{space 4}-.0155637{col 67}{space 3} .0022562
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2} -.003167{col 26}{space 2} .0038202{col 37}{space 1}   -0.83{col 46}{space 3}0.407{col 54}{space 4}-.0106544{col 67}{space 3} .0043203
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1F************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  srh_2012g* if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2}  .359362{col 26}{space 2}  .038046{col 37}{space 1}    9.45{col 46}{space 3}0.000{col 54}{space 4} .2847931{col 67}{space 3} .4339309
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .3742778{col 26}{space 2} .0360458{col 37}{space 1}   10.38{col 46}{space 3}0.000{col 54}{space 4} .3036294{col 67}{space 3} .4449263
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0090327{col 26}{space 2} .0145165{col 37}{space 1}   -0.62{col 46}{space 3}0.534{col 54}{space 4}-.0374844{col 67}{space 3} .0194191
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0020918{col 26}{space 2} .0036534{col 37}{space 1}   -0.57{col 46}{space 3}0.567{col 54}{space 4}-.0092523{col 67}{space 3} .0050687
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0037914{col 26}{space 2} .0032007{col 37}{space 1}   -1.18{col 46}{space 3}0.236{col 54}{space 4}-.0100646{col 67}{space 3} .0024819
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6366758{col 26}{space 2} .0641428{col 37}{space 1}    9.93{col 46}{space 3}0.000{col 54}{space 4} .5109582{col 67}{space 3} .7623934
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6852088{col 26}{space 2} .0678583{col 37}{space 1}   10.10{col 46}{space 3}0.000{col 54}{space 4}  .552209{col 67}{space 3} .8182086
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0337177{col 26}{space 2} .0135395{col 37}{space 1}   -2.49{col 46}{space 3}0.013{col 54}{space 4}-.0602547{col 67}{space 3}-.0071808
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0106649{col 26}{space 2} .0053911{col 37}{space 1}   -1.98{col 46}{space 3}0.048{col 54}{space 4}-.0212312{col 67}{space 3}-.0000987
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0041503{col 26}{space 2} .0039947{col 37}{space 1}   -1.04{col 46}{space 3}0.299{col 54}{space 4}-.0119797{col 67}{space 3} .0036792
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite srh_2012g1 srh_2012g2 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .5528615{col 26}{space 2} .0536877{col 37}{space 1}   10.30{col 46}{space 3}0.000{col 54}{space 4} .4476355{col 67}{space 3} .6580874
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .5850936{col 26}{space 2}  .056008{col 37}{space 1}   10.45{col 46}{space 3}0.000{col 54}{space 4} .4753198{col 67}{space 3} .6948673
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0222748{col 26}{space 2} .0129726{col 37}{space 1}   -1.72{col 46}{space 3}0.086{col 54}{space 4}-.0477005{col 67}{space 3}  .003151
+{txt}ereri_intmed {c |}{col 14}{res}{space 2} -.005736{col 26}{space 2} .0040071{col 37}{space 1}   -1.43{col 46}{space 3}0.152{col 54}{space 4}-.0135898{col 67}{space 3} .0021179
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0042214{col 26}{space 2} .0033745{col 37}{space 1}   -1.25{col 46}{space 3}0.211{col 54}{space 4}-.0108354{col 67}{space 3} .0023926
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1G************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite   bmibr_2012g*   if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  2.60e+10
+{txt}{col 49}        avg{col 67}= {res}  6.12e+12
+{txt}{col 49}        max{col 67}= {res}  1.64e+13
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4462085{col 26}{space 2} .0402156{col 37}{space 1}   11.10{col 46}{space 3}0.000{col 54}{space 4} .3673874{col 67}{space 3} .5250295
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4538879{col 26}{space 2} .0363886{col 37}{space 1}   12.47{col 46}{space 3}0.000{col 54}{space 4} .3825676{col 67}{space 3} .5252081
+{txt}ereri_intref {c |}{col 14}{res}{space 2} -.004215{col 26}{space 2}  .017077{col 37}{space 1}   -0.25{col 46}{space 3}0.805{col 54}{space 4}-.0376852{col 67}{space 3} .0292552
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0012948{col 26}{space 2} .0053917{col 37}{space 1}   -0.24{col 46}{space 3}0.810{col 54}{space 4}-.0118622{col 67}{space 3} .0092727
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0021697{col 26}{space 2} .0042225{col 37}{space 1}   -0.51{col 46}{space 3}0.607{col 54}{space 4}-.0104457{col 67}{space 3} .0061064
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  6.78e+09
+{txt}{col 49}        avg{col 67}= {res}  2.00e+11
+{txt}{col 49}        max{col 67}= {res}  8.31e+11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7387355{col 26}{space 2} .0670844{col 37}{space 1}   11.01{col 46}{space 3}0.000{col 54}{space 4} .6072526{col 67}{space 3} .8702185
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7844609{col 26}{space 2} .0704248{col 37}{space 1}   11.14{col 46}{space 3}0.000{col 54}{space 4} .6464308{col 67}{space 3} .9224909
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0314968{col 26}{space 2}  .015587{col 37}{space 1}   -2.02{col 46}{space 3}0.043{col 54}{space 4}-.0620468{col 67}{space 3}-.0009469
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0123922{col 26}{space 2} .0069522{col 37}{space 1}   -1.78{col 46}{space 3}0.075{col 54}{space 4}-.0260184{col 67}{space 3} .0012339
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0018363{col 26}{space 2} .0051392{col 37}{space 1}   -0.36{col 46}{space 3}0.721{col 54}{space 4}-.0119089{col 67}{space 3} .0082363
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite bmibr_2012g1 bmibr_2012g2 bmibr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}  7.91e+09
+{txt}{col 49}        avg{col 67}= {res}  1.72e+11
+{txt}{col 49}        max{col 67}= {res}  4.50e+11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6392303{col 26}{space 2} .0565393{col 37}{space 1}   11.31{col 46}{space 3}0.000{col 54}{space 4} .5284153{col 67}{space 3} .7500452
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6671866{col 26}{space 2} .0583191{col 37}{space 1}   11.44{col 46}{space 3}0.000{col 54}{space 4} .5528833{col 67}{space 3} .7814899
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0189815{col 26}{space 2} .0150137{col 37}{space 1}   -1.26{col 46}{space 3}0.206{col 54}{space 4}-.0484078{col 67}{space 3} .0104448
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0064835{col 26}{space 2} .0055544{col 37}{space 1}   -1.17{col 46}{space 3}0.243{col 54}{space 4}-.0173699{col 67}{space 3} .0044029
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0024914{col 26}{space 2} .0044625{col 37}{space 1}   -0.56{col 46}{space 3}0.577{col 54}{space 4}-.0112377{col 67}{space 3} .0062549
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1H************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  cardiometcondbr_2012g* if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}  3.54e+59
+{txt}{col 49}        avg{col 67}= {res}  3.98e+59
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4289741{col 26}{space 2} .0392074{col 37}{space 1}   10.94{col 46}{space 3}0.000{col 54}{space 4} .3521291{col 67}{space 3} .5058191
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4520405{col 26}{space 2} .0370691{col 37}{space 1}   12.19{col 46}{space 3}0.000{col 54}{space 4} .3793863{col 67}{space 3} .5246946
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0152414{col 26}{space 2} .0149892{col 37}{space 1}   -1.02{col 46}{space 3}0.309{col 54}{space 4}-.0446198{col 67}{space 3} .0141369
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0045896{col 26}{space 2} .0048638{col 37}{space 1}   -0.94{col 46}{space 3}0.345{col 54}{space 4}-.0141226{col 67}{space 3} .0049433
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0032353{col 26}{space 2} .0038905{col 37}{space 1}   -0.83{col 46}{space 3}0.406{col 54}{space 4}-.0108605{col 67}{space 3} .0043898
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6800128{col 26}{space 2}  .065491{col 37}{space 1}   10.38{col 46}{space 3}0.000{col 54}{space 4} .5516529{col 67}{space 3} .8083728
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7353933{col 26}{space 2} .0692198{col 37}{space 1}   10.62{col 46}{space 3}0.000{col 54}{space 4}  .599725{col 67}{space 3} .8710616
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0382765{col 26}{space 2} .0139606{col 37}{space 1}   -2.74{col 46}{space 3}0.006{col 54}{space 4}-.0656387{col 67}{space 3}-.0109143
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0143179{col 26}{space 2} .0064012{col 37}{space 1}   -2.24{col 46}{space 3}0.025{col 54}{space 4}-.0268641{col 67}{space 3}-.0017718
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2} -.002786{col 26}{space 2} .0046572{col 37}{space 1}   -0.60{col 46}{space 3}0.550{col 54}{space 4}-.0119141{col 67}{space 3}  .006342
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite cardiometcondbr_2012g1 cardiometcondbr_2012g2 cardiometcondbr_2012g3 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .5949541{col 26}{space 2} .0548291{col 37}{space 1}   10.85{col 46}{space 3}0.000{col 54}{space 4} .4874911{col 67}{space 3}  .702417
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6330933{col 26}{space 2} .0569977{col 37}{space 1}   11.11{col 46}{space 3}0.000{col 54}{space 4} .5213799{col 67}{space 3} .7448067
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0263674{col 26}{space 2} .0134477{col 37}{space 1}   -1.96{col 46}{space 3}0.050{col 54}{space 4}-.0527243{col 67}{space 3}-.0000105
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0083798{col 26}{space 2} .0049982{col 37}{space 1}   -1.68{col 46}{space 3}0.094{col 54}{space 4}-.0181761{col 67}{space 3} .0014165
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0033921{col 26}{space 2} .0039871{col 37}{space 1}   -0.85{col 46}{space 3}0.395{col 54}{space 4}-.0112066{col 67}{space 3} .0044225
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1I************
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  zcesd_2012 if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,812
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}  6.65e+59
+{txt}{col 49}        avg{col 67}= {res}  6.65e+59
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4409434{col 26}{space 2} .0434062{col 37}{space 1}   10.16{col 46}{space 3}0.000{col 54}{space 4} .3558687{col 67}{space 3}  .526018
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4707796{col 26}{space 2} .0420946{col 37}{space 1}   11.18{col 46}{space 3}0.000{col 54}{space 4} .3882757{col 67}{space 3} .5532836
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0192599{col 26}{space 2} .0154777{col 37}{space 1}   -1.24{col 46}{space 3}0.213{col 54}{space 4}-.0495956{col 67}{space 3} .0110758
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0056386{col 26}{space 2} .0051492{col 37}{space 1}   -1.10{col 46}{space 3}0.274{col 54}{space 4}-.0157308{col 67}{space 3} .0044537
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0049378{col 26}{space 2} .0039374{col 37}{space 1}   -1.25{col 46}{space 3}0.210{col 54}{space 4} -.012655{col 67}{space 3} .0027794
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,812
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7068061{col 26}{space 2} .0711624{col 37}{space 1}    9.93{col 46}{space 3}0.000{col 54}{space 4} .5673303{col 67}{space 3} .8462819
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7638728{col 26}{space 2} .0756384{col 37}{space 1}   10.10{col 46}{space 3}0.000{col 54}{space 4} .6156243{col 67}{space 3} .9121213
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0404328{col 26}{space 2} .0147233{col 37}{space 1}   -2.75{col 46}{space 3}0.006{col 54}{space 4}-.0692899{col 67}{space 3}-.0115757
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0125077{col 26}{space 2} .0060309{col 37}{space 1}   -2.07{col 46}{space 3}0.038{col 54}{space 4}-.0243281{col 67}{space 3}-.0006873
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0041262{col 26}{space 2} .0039819{col 37}{space 1}   -1.04{col 46}{space 3}0.300{col 54}{space 4}-.0119306{col 67}{space 3} .0036783
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zcesd_2012 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,812
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6509057{col 26}{space 2} .0636338{col 37}{space 1}   10.23{col 46}{space 3}0.000{col 54}{space 4} .5261857{col 67}{space 3} .7756257
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6974298{col 26}{space 2} .0672393{col 37}{space 1}   10.37{col 46}{space 3}0.000{col 54}{space 4} .5656431{col 67}{space 3} .8292164
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0326852{col 26}{space 2} .0143701{col 37}{space 1}   -2.27{col 46}{space 3}0.023{col 54}{space 4}-.0608501{col 67}{space 3}-.0045203
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0091945{col 26}{space 2} .0052157{col 37}{space 1}   -1.76{col 46}{space 3}0.078{col 54}{space 4}-.0194171{col 67}{space 3} .0010281
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0046443{col 26}{space 2} .0036848{col 37}{space 1}   -1.26{col 46}{space 3}0.208{col 54}{space 4}-.0118664{col 67}{space 3} .0025778
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1J*********
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  alcohol_2012g* if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,893
+{txt}{col 49}Average RVI{col 67}= {res}    0.0004
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0008
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}5610129.10
+{txt}{col 49}        avg{col 67}= {res}  8.48e+07
+{txt}{col 49}        max{col 67}= {res}  2.09e+08
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4506176{col 26}{space 2} .0412144{col 37}{space 1}   10.93{col 46}{space 3}0.000{col 54}{space 4} .3698388{col 67}{space 3} .5313964
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4634358{col 26}{space 2} .0385225{col 37}{space 1}   12.03{col 46}{space 3}0.000{col 54}{space 4} .3879331{col 67}{space 3} .5389385
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0074898{col 26}{space 2} .0162959{col 37}{space 1}   -0.46{col 46}{space 3}0.646{col 54}{space 4}-.0394293{col 67}{space 3} .0244496
+{txt}ereri_intmed {c |}{col 14}{res}{space 2} -.002067{col 26}{space 2} .0047413{col 37}{space 1}   -0.44{col 46}{space 3}0.663{col 54}{space 4}-.0113596{col 67}{space 3} .0072257
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0032614{col 26}{space 2} .0037564{col 37}{space 1}   -0.87{col 46}{space 3}0.385{col 54}{space 4}-.0106238{col 67}{space 3}  .004101
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,893
+{txt}{col 49}Average RVI{col 67}= {res}    0.0006
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0011
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}3494312.86
+{txt}{col 49}        avg{col 67}= {res}  7.48e+07
+{txt}{col 49}        max{col 67}= {res}  2.94e+08
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2}   .70989{col 26}{space 2} .0667684{col 37}{space 1}   10.63{col 46}{space 3}0.000{col 54}{space 4} .5790264{col 67}{space 3} .8407537
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2}  .757463{col 26}{space 2} .0702616{col 37}{space 1}   10.78{col 46}{space 3}0.000{col 54}{space 4} .6197528{col 67}{space 3} .8951732
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0329081{col 26}{space 2} .0148109{col 37}{space 1}   -2.22{col 46}{space 3}0.026{col 54}{space 4}-.0619369{col 67}{space 3}-.0038793
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0117727{col 26}{space 2} .0062308{col 37}{space 1}   -1.89{col 46}{space 3}0.059{col 54}{space 4} -.023985{col 67}{space 3} .0004395
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0028921{col 26}{space 2} .0045873{col 37}{space 1}   -0.63{col 46}{space 3}0.528{col 54}{space 4}-.0118831{col 67}{space 3} .0060989
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite alcohol_2012g1 alcohol_2012g2 alcohol_2012g3 alcohol_2012g4 were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,893
+{txt}{col 49}Average RVI{col 67}= {res}    0.0007
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0015
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}DF:     min{col 67}= {res}1858961.47
+{txt}{col 49}        avg{col 67}= {res}  3.73e+07
+{txt}{col 49}        max{col 67}= {res}  7.17e+07
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6118477{col 26}{space 2} .0561563{col 37}{space 1}   10.90{col 46}{space 3}0.000{col 54}{space 4} .5017834{col 67}{space 3}  .721912
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6407507{col 26}{space 2} .0580687{col 37}{space 1}   11.03{col 46}{space 3}0.000{col 54}{space 4}  .526938{col 67}{space 3} .7545634
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0201899{col 26}{space 2} .0143891{col 37}{space 1}   -1.40{col 46}{space 3}0.161{col 54}{space 4}-.0483921{col 67}{space 3} .0080122
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0057741{col 26}{space 2} .0046042{col 37}{space 1}   -1.25{col 46}{space 3}0.210{col 54}{space 4}-.0147982{col 67}{space 3}   .00325
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2} -.002939{col 26}{space 2} .0037201{col 37}{space 1}   -0.79{col 46}{space 3}0.430{col 54}{space 4}-.0102302{col 67}{space 3} .0043523
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***MODEL 1K*********
+. 
+. foreach x of varlist zlnhurd_odds zlnexpert_odds zlnlasso_odds {c -(}
+{txt}  2{com}. mi estimate, cmdok esampvaryok: med4way `x' foodinsecurity_totbr  AGE2012 SEX NonWhite  zhei2015_total_score if sample_final==1 , a0(0) a1(1) m(0) yreg(cox) mreg(linear) 
+{txt}  3{com}. {c )-}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}  3.47e+59
+{txt}{col 49}        avg{col 67}= {res}  3.47e+59
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .4413475{col 26}{space 2} .0402162{col 37}{space 1}   10.97{col 46}{space 3}0.000{col 54}{space 4} .3625251{col 67}{space 3} .5201699
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .4513092{col 26}{space 2} .0368994{col 37}{space 1}   12.23{col 46}{space 3}0.000{col 54}{space 4} .3789877{col 67}{space 3} .5236307
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0055196{col 26}{space 2} .0166443{col 37}{space 1}   -0.33{col 46}{space 3}0.740{col 54}{space 4}-.0381418{col 67}{space 3} .0271025
+{txt}ereri_intmed {c |}{col 14}{res}{space 2} -.001613{col 26}{space 2} .0050646{col 37}{space 1}   -0.32{col 46}{space 3}0.750{col 54}{space 4}-.0115394{col 67}{space 3} .0083134
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2} -.002829{col 26}{space 2} .0039928{col 37}{space 1}   -0.71{col 46}{space 3}0.479{col 54}{space 4}-.0106549{col 67}{space 3} .0049968
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .7160973{col 26}{space 2} .0663683{col 37}{space 1}   10.79{col 46}{space 3}0.000{col 54}{space 4} .5860178{col 67}{space 3} .8461769
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .7628917{col 26}{space 2} .0697766{col 37}{space 1}   10.93{col 46}{space 3}0.000{col 54}{space 4} .6261321{col 67}{space 3} .8996514
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0320524{col 26}{space 2} .0150639{col 37}{space 1}   -2.13{col 46}{space 3}0.033{col 54}{space 4}-.0615772{col 67}{space 3}-.0025277
+{txt}ereri_intmed {c |}{col 14}{res}{space 2} -.012191{col 26}{space 2} .0066058{col 37}{space 1}   -1.85{col 46}{space 3}0.065{col 54}{space 4} -.025138{col 67}{space 3} .0007561
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0025511{col 26}{space 2} .0048989{col 37}{space 1}   -0.52{col 46}{space 3}0.603{col 54}{space 4}-.0121528{col 67}{space 3} .0070507
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}{err}Warning: this analysis assumes a rare outcome.
+Warning: fixed values for the covariates AGE2012 SEX NonWhite zhei2015_total_score were not provided. All covariates are fixed at their respective mean.
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}{col 49}Number of obs{col 67}= {res}     2,894
+{txt}{col 49}Average RVI{col 67}= {res}    0.0000
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0000
+{txt}DF adjustment:{ralign 15: {res:Large sample}}{col 49}{help mi_missingdf##|_new:DF}:     min{col 67}= {res}         .
+{txt}{col 49}        avg{col 67}= {res}         .
+{txt}{col 49}        max{col 67}= {res}         .
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tereri {c |}{col 14}{res}{space 2} .6138596{col 26}{space 2} .0556495{col 37}{space 1}   11.03{col 46}{space 3}0.000{col 54}{space 4} .5047886{col 67}{space 3} .7229307
+{txt}{space 3}ereri_cde {c |}{col 14}{res}{space 2} .6421937{col 26}{space 2} .0574151{col 37}{space 1}   11.19{col 46}{space 3}0.000{col 54}{space 4} .5296622{col 67}{space 3} .7547252
+{txt}ereri_intref {c |}{col 14}{res}{space 2}-.0194724{col 26}{space 2} .0145873{col 37}{space 1}   -1.33{col 46}{space 3}0.182{col 54}{space 4} -.048063{col 67}{space 3} .0091183
+{txt}ereri_intmed {c |}{col 14}{res}{space 2}-.0060951{col 26}{space 2} .0050188{col 37}{space 1}   -1.21{col 46}{space 3}0.225{col 54}{space 4}-.0159318{col 67}{space 3} .0037415
+{txt}{space 3}ereri_pie {c |}{col 14}{res}{space 2}-.0027666{col 26}{space 2}  .004064{col 37}{space 1}   -0.68{col 46}{space 3}0.496{col 54}{space 4}-.0107319{col 67}{space 3} .0051988
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}
