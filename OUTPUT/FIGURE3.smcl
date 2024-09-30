@@ -1,0 +1,402 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. use finaldata_imputed_FINAL,clear
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\baydounm\AppData\Local\Temp\STDf14_000000.tmp"
+{txt}
+{com}. 
+. **STEP 14: FIGURE 2: COMPARE SURVIVAL PROBABILITIES ACROSS EXPOSURE (foodinsecurity_tot, create tertiles) AND MEDIATOR LEVELS (hurd_dem expert_dem lasso_dem)**
+. 
+. mi extract 0
+{txt}
+{com}. 
+. save finaldata_unimputed_FINAL, replace
+{txt}{p 0 4 2}
+file {bf}
+finaldata_unimputed_FINAL.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. stset ageevent if sample_final==1, failure(died==1) enter(AGE2014) origin(AGE2014) scale(1)
+
+{txt}Survival-time data settings
+
+{col 10}Failure event: {res}died==1
+{col 1}{txt}Observed time interval: {res}(origin, ageevent]
+{col 6}{txt}Enter on or after: {res}time AGE2014
+{col 6}{txt}Exit on or before: {res}failure
+{col 6}{txt}Time for analysis: {res}(time-origin)
+{col 17}{txt}Origin: {res}time AGE2014
+{col 7}{txt}Keep observations 
+{col 17}{help j_st_ifvsoptif:{bf:if} {it:exp}}: {res}sample_final==1
+
+{txt}{hline 74}
+{res}     43,382{txt}  total observations
+{res}     40,488{txt}  ignored at outset because of {bf:if} {it:exp}
+{res}          7{txt}  event time missing (ageevent>=.){col 61}PROBABLE ERROR
+{res}          1{txt}  observation ends on or before {bf:enter()}
+{hline 74}
+{res}      2,886{txt}  observations remaining, representing
+{res}        894{txt}  failures in single-record/single-failure data
+{res} 17,435.107{txt}  total analysis time at risk and under observation
+                                                At risk from t = {res}        0
+                                     {txt}Earliest observed entry t = {res}        0
+                                          {txt}Last observed exit t = {res} 7.699043
+{txt}
+{com}. 
+. 
+. stdescribe if sample_final==1
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}{col 36}{c LT}{hline 14} Per subject {hline 14}{c RT}
+Category{col 28}Total{col 41}Mean{col 54}Min{col 62}Median{col 76}Max
+{hline 78}
+Number of subjects    {res}      2886   
+{txt}Number of records     {res}      2886           1           1          1          1
+
+{txt}Entry time (first)                 {res}        0           0          0          0
+{txt}Exit time (final)                  {res}  6.04127    .1067047   6.748291   7.699043
+
+{txt}Subjects with gap     {res}         0   
+{txt}Time on gap           {res}         0   
+{txt}Time at risk          {res} 17435.107     6.04127    .1067047   6.748291   7.699043
+
+{txt}Failures              {res}       894    .3097713           0          0          1
+{txt}{hline 78}
+
+{com}. stsum if sample_final==1
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}{col 10}{c |}{col 26}Incidence{col 40}Number of{col 52}{c LT}{hline 6} Survival time {hline 5}{c RT}
+        {col 10}{c |} Time at risk{col 31}rate{col 41}subjects{col 57}25%{col 67}50%{col 77}75%
+{hline 9}{c +}{hline 69}
+   Total {c |} {res} 17,435.1067   .0512759{col 40}     2886   5.777016  7.699043  7.699043
+{txt}
+{com}. strate if sample_final==1
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Estimated failure rates
+Number of records = {res}2886
+{txt}
+  {c TLC}{hline 5}{c -}{hline 9}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c TRC}
+  {c |} {res}  D         Y       Rate      Lower      Upper {txt}{c |}
+  {c LT}{hline 5}{c -}{hline 9}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c RT}
+  {c |} {res}894   1.7e+04   0.051276   0.048022   0.054750 {txt}{c |}
+  {c BLC}{hline 5}{c -}{hline 9}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c BRC}
+   Notes: Rate = D/Y = failures/person-time.
+          Lower and Upper are bounds of 95% confidence intervals.
+
+
+{com}. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+finaldata_unimputed_FINAL.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. bysort foodinsecurity_totbr: su foodinsecurity_tot if sample_final==1,detail
+
+{txt}{hline}
+-> foodinsecurity_totbr = 0
+
+        HNB1_13r HNB2_13r HNB3_13r HNB3_13r HNB4_13r
+                      HNB5_13r == 1 2 3
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        0              0
+{txt} 5%    {res}        0              0
+{txt}10%    {res}        0              0       {txt}Obs         {res}      2,611
+{txt}25%    {res}        0              0       {txt}Sum of wgt. {res}      2,611
+
+{txt}50%    {res}        0                      {txt}Mean          {res} .0559173
+                        {txt}Largest       Std. dev.     {res} .2298059
+{txt}75%    {res}        0              1
+{txt}90%    {res}        0              1       {txt}Variance      {res} .0528108
+{txt}95%    {res}        1              1       {txt}Skewness      {res} 3.865591
+{txt}99%    {res}        1              1       {txt}Kurtosis      {res} 15.94279
+
+{txt}{hline}
+-> foodinsecurity_totbr = 1
+
+        HNB1_13r HNB2_13r HNB3_13r HNB3_13r HNB4_13r
+                      HNB5_13r == 1 2 3
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        2              2
+{txt} 5%    {res}        2              2
+{txt}10%    {res}        2              2       {txt}Obs         {res}        283
+{txt}25%    {res}        2              2       {txt}Sum of wgt. {res}        283
+
+{txt}50%    {res}        3                      {txt}Mean          {res} 3.540636
+                        {txt}Largest       Std. dev.     {res} 1.582577
+{txt}75%    {res}        5              6
+{txt}90%    {res}        6              6       {txt}Variance      {res} 2.504549
+{txt}95%    {res}        6              6       {txt}Skewness      {res} .4201175
+{txt}99%    {res}        6              6       {txt}Kurtosis      {res} 1.600128
+
+{txt}{hline}
+-> foodinsecurity_totbr = .
+
+        HNB1_13r HNB2_13r HNB3_13r HNB3_13r HNB4_13r
+                      HNB5_13r == 1 2 3
+{hline 61}
+no observations
+
+
+{com}. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+finaldata_unimputed_FINAL.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. *************Food secure***********************
+. 
+. sts test hurd_dem if sample_final==1 & foodinsecurity_totbr==0, logrank
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Equality of survivor functions
+Log-rank test
+
+{col 9} {c |}  Observed       Expected
+hurd_dem {c |}    events         events
+{hline 9}{c +}{hline 25}
+       0 {c |}{res}       605         754.25
+       {txt}1 {c |}{res}       215          65.75
+{txt}{hline 9}{c +}{hline 25}
+   Total {c |}{res}       820         820.00
+
+                   {txt}chi2(1) = {res}370.40
+                   {txt}Pr>chi2 = {res}0.0000
+{txt}
+{com}. sts graph if sample_final==1 & foodinsecurity_totbr==0, by(hurd_dem) 
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+{txt}
+{com}. 
+. graph save "FIGURE3A1.gph", replace
+{res}{txt}file {bf:FIGURE3A1.gph} saved
+
+{com}. 
+. 
+. 
+. sts test expert_dem if sample_final==1 & foodinsecurity_totbr==0, logrank
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Equality of survivor functions
+Log-rank test
+
+{col 11} {c |}  Observed       Expected
+expert_dem {c |}    events         events
+{hline 11}{c +}{hline 25}
+         0 {c |}{res}       577         748.21
+         {txt}1 {c |}{res}       243          71.79
+{txt}{hline 11}{c +}{hline 25}
+     Total {c |}{res}       820         820.00
+
+                     {txt}chi2(1) = {res}450.36
+                     {txt}Pr>chi2 = {res}0.0000
+{txt}
+{com}. sts graph if sample_final==1 & foodinsecurity_totbr==0, by(expert_dem) 
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+{txt}
+{com}. 
+. graph save "FIGURE3A2.gph", replace
+{res}{txt}file {bf:FIGURE3A2.gph} saved
+
+{com}. 
+. 
+. sts test lasso_dem if sample_final==1 & foodinsecurity_totbr==0, logrank
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Equality of survivor functions
+Log-rank test
+
+{col 10} {c |}  Observed       Expected
+lasso_dem {c |}    events         events
+{hline 10}{c +}{hline 25}
+        0 {c |}{res}       588         744.96
+        {txt}1 {c |}{res}       232          75.04
+{txt}{hline 10}{c +}{hline 25}
+    Total {c |}{res}       820         820.00
+
+                    {txt}chi2(1) = {res}363.52
+                    {txt}Pr>chi2 = {res}0.0000
+{txt}
+{com}. sts graph if sample_final==1 & foodinsecurity_totbr==0, by(lasso_dem) 
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+{txt}
+{com}. 
+. graph save "FIGURE3A3.gph", replace
+{res}{txt}file {bf:FIGURE3A3.gph} saved
+
+{com}. 
+. graph combine "FIGURE3A1.gph" "FIGURE3A2.gph" "FIGURE3A3.gph"
+{res}{txt}
+{com}. graph save "FIGURE3A.gph", replace
+{res}{txt}file {bf:FIGURE3A.gph} saved
+
+{com}. 
+. 
+. 
+. *************Food insecure***********************
+. 
+. sts test hurd_dem if sample_final==1 & foodinsecurity_totbr==1, logrank
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Equality of survivor functions
+Log-rank test
+
+{col 9} {c |}  Observed       Expected
+hurd_dem {c |}    events         events
+{hline 9}{c +}{hline 25}
+       0 {c |}{res}        53          63.66
+       {txt}1 {c |}{res}        21          10.34
+{txt}{hline 9}{c +}{hline 25}
+   Total {c |}{res}        74          74.00
+
+                   {txt}chi2(1) =  {res}12.82
+                   {txt}Pr>chi2 = {res}0.0003
+{txt}
+{com}. sts graph if sample_final==1 & foodinsecurity_totbr==1, by(hurd_dem) 
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+{txt}
+{com}. 
+. graph save "FIGURE3B1.gph", replace
+{res}{txt}file {bf:FIGURE3B1.gph} saved
+
+{com}. 
+. 
+. 
+. sts test expert_dem if sample_final==1 & foodinsecurity_totbr==1, logrank
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Equality of survivor functions
+Log-rank test
+
+{col 11} {c |}  Observed       Expected
+expert_dem {c |}    events         events
+{hline 11}{c +}{hline 25}
+         0 {c |}{res}        49          63.32
+         {txt}1 {c |}{res}        25          10.68
+{txt}{hline 11}{c +}{hline 25}
+     Total {c |}{res}        74          74.00
+
+                     {txt}chi2(1) =  {res}22.56
+                     {txt}Pr>chi2 = {res}0.0000
+{txt}
+{com}. sts graph if sample_final==1 & foodinsecurity_totbr==1, by(expert_dem) 
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+{txt}
+{com}. 
+. graph save "FIGURE3B2.gph", replace
+{res}{txt}file {bf:FIGURE3B2.gph} saved
+
+{com}. 
+. 
+. sts test lasso_dem if sample_final==1 & foodinsecurity_totbr==1, logrank
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+
+{txt}Equality of survivor functions
+Log-rank test
+
+{col 10} {c |}  Observed       Expected
+lasso_dem {c |}    events         events
+{hline 10}{c +}{hline 25}
+        0 {c |}{res}        51          63.82
+        {txt}1 {c |}{res}        23          10.18
+{txt}{hline 10}{c +}{hline 25}
+    Total {c |}{res}        74          74.00
+
+                    {txt}chi2(1) =  {res}18.84
+                    {txt}Pr>chi2 = {res}0.0000
+{txt}
+{com}. sts graph if sample_final==1 & foodinsecurity_totbr==1, by(lasso_dem) 
+
+{col 10}{txt}Failure {bf:_d}: {res}died==1
+{col 4}{txt}Analysis time {bf:_t}: {res}(ageevent-origin)
+{col 14}{txt}Origin: {res}time AGE2014
+{col 3}{txt}Enter on or after: {res}time AGE2014
+{txt}
+{com}. 
+. graph save "FIGURE3B3.gph", replace
+{res}{txt}file {bf:FIGURE3B3.gph} saved
+
+{com}. 
+. graph combine "FIGURE3B1.gph" "FIGURE3B2.gph" "FIGURE3B3.gph"
+{res}{txt}
+{com}. graph save "FIGURE3B.gph", replace
+{res}{txt}file {bf:FIGURE3B.gph} saved
+
+{com}. 
+. 
+. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}
